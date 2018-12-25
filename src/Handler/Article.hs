@@ -17,16 +17,16 @@ module Handler.Article where
 
 import Import
 
-import           Control.Monad.Logger
+-- import           Control.Monad.Logger
 import           Data.Text               (Text)
-import           Database.Persist.Sqlite
-import           Yesod
+-- import           Database.Persist.Sqlite
+-- import           Yesod
 
-import qualified Database.Esqueleto      as E
-import           Database.Esqueleto      ((^.))
+-- import qualified Database.Esqueleto      as E
+-- import           Database.Esqueleto      ((^.))
 
-import qualified Data.Conduit.List as CL
-import Data.Conduit (($=))
+-- import qualified Data.Conduit.List as CL
+-- import Data.Conduit (($=))
 
 
 -- フォーム取得
@@ -36,10 +36,10 @@ articleForm article extra = do
   (publishedResult, publishedView)    <- mreq dayField "公開日" (articlePublished <$> article)
   (viewCountResult, viewCountView)    <- mopt intField "ビュー数" (articleViewCount <$> article)
   let result = Article
-      <$> titleResult
-      <*> publishedResult
-      <*> viewCountResult
-    widget = $(widgetFile "article-editor-form")
+               <$> titleResult
+               <*> publishedResult
+               <*> viewCountResult
+      widget = $(widgetFile "article-editor-form")
   return (result, widget)
 
 -- 新規登録
@@ -53,9 +53,15 @@ getArticleR = do
 -- 新規登録処理のポスト
 postArticleR :: Handler Html
 postArticleR = do
-  ((result, widget),enctype) <- runFormPost $ articleForm Nothing let header = "Article新規登録" :: Text case result of FormSuccess article -> do
+  ((result, widget),enctype) <- runFormPost $ articleForm Nothing 
+  let 
+    header = "Article新規登録" :: Text 
+  case result of 
+    FormSuccess article -> do
       -- Postされたデータが正常な場合
-      articleId <- runDB $ insert article redirect ArticleListR FormFailure _ -> do
+      articleId <- runDB $ insert article 
+      redirect ArticleListR 
+    FormFailure _ -> do
       -- 不正な入力値のデータが送信された場合(必須項目が未入力等)
       setMessage "不正なデータが送信されました。"
       defaultLayout $(widgetFile "article")
