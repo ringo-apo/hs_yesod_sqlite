@@ -10,23 +10,8 @@
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE GADTs                      #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE MultiParamTypeClasses      #-}
-{-# LANGUAGE OverloadedStrings          #-}
-{-# LANGUAGE QuasiQuotes                #-}
-{-# LANGUAGE TemplateHaskell            #-}
-{-# LANGUAGE TypeFamilies               #-}
-{-# LANGUAGE ViewPatterns               #-}
 
-{-# LANGUAGE EmptyDataDecls             #-}
-{-# LANGUAGE FlexibleContexts           #-}
-{-# LANGUAGE GADTs                      #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE MultiParamTypeClasses      #-}
-{-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE QuasiQuotes                #-}
-{-# LANGUAGE TemplateHaskell            #-}
-{-# LANGUAGE TypeFamilies               #-}
-{-# LANGUAGE ViewPatterns               #-}
 
 module Handler.Article where
 
@@ -37,12 +22,9 @@ import           Data.Text               (Text)
 import           Database.Persist.Sqlite
 import           Yesod
 
-import           Control.Monad.Logger
-import           Data.Text               (Text)
 import qualified Database.Esqueleto      as E
 import           Database.Esqueleto      ((^.))
-import           Database.Persist.Sqlite
-import           Yesod
+
 import qualified Data.Conduit.List as CL
 import Data.Conduit (($=))
 
